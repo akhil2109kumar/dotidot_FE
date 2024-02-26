@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ReactFlow, { Controls, useEdgesState, useNodesState } from "reactflow";
+import ReactFlow, { Controls, Node, useEdgesState, useNodesState } from "reactflow";
 import "reactflow/dist/style.css";
 
 import { generateEdges } from "../utils/generate-edges";
