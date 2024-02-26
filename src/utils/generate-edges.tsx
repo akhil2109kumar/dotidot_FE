@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Edge, Node } from 'reactflow';
 import { IData } from '../types/enums';
 import { connectById, connectByPlaceholder } from './connect-edges';

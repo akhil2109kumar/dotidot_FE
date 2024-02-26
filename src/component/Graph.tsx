@@ -59,7 +59,6 @@ function Graph() {
   };
 
   const highlightSelection = (targetNode: Node): void => {
-    // Determine IDs of nodes directly connected to the targetNode
     const connectedNodeIds = new Set();
     edges.forEach((edge) => {
       if (edge.source === targetNode.id) {
@@ -69,7 +68,6 @@ function Graph() {
       }
     });
 
-    // Update nodes: set the target node and connected nodes as active
     const updatedNodes = nodes.map((node) => {
       const isActive =
         node.id === targetNode.id || connectedNodeIds.has(node.id);
@@ -81,12 +79,11 @@ function Graph() {
       };
     });
 
-    // Update edges: animate edges connected to the target node
     const updatedEdges = edges.map((edge) => {
       const isSourceOrTarget =
         edge.source === targetNode.id || edge.target === targetNode.id;
       const strokeColor = isSourceOrTarget ? "#000" : "#a6a6a6";
-      const opacity = isSourceOrTarget ? 1 : 0.75; // Highlight active nodes more prominently
+      const opacity = isSourceOrTarget ? 1 : 0.75;
       return {
         ...edge,
         animated: isSourceOrTarget,
@@ -94,7 +91,6 @@ function Graph() {
       };
     });
 
-    // Apply the updated nodes and edges to the variable-map
     setNodes(updatedNodes);
     setEdges(updatedEdges);
   };
