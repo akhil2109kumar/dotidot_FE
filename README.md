@@ -20,4 +20,6 @@ Run :-
 ```
 After running the start command the server will start on localhost:5173
 
+## Server Link
 
+https://dotidot-fe.onrender.com/
