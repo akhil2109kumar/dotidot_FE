@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import ReactFlow, { Controls, Node, useEdgesState, useNodesState } from "reactflow";
+import ReactFlow, {
+  Controls,
+  Node,
+  useEdgesState,
+  useNodesState,
+} from "reactflow";
 import "reactflow/dist/style.css";
 
-import { generateEdges } from "../utils/generate-edges";
-import { generateNodes } from "../utils/generate-nodes";
 import { IData } from "../types/enums";
+import { createCollections } from "../collections/createCollections";
+import { generateLayout } from "../nodeAndEdge/generateLayout";
 
 function Graph() {
   const [data, setData] = useState<IData>();
@@ -17,11 +22,11 @@ function Graph() {
 
   useEffect(() => {
     if (data) {
-      const nodes = generateNodes(data);
-      const edges = generateEdges(data, nodes);
-
-      setNodes(nodes);
-      setEdges(edges);
+      const nodes = createCollections(data);
+      const layoutedNodes = generateLayout(nodes.nodes, nodes.edges);
+      console.log(layoutedNodes)
+      setNodes(layoutedNodes);
+      setEdges(nodes.edges);
     }
   }, [data]);
 
@@ -34,7 +39,7 @@ function Graph() {
         throw new Error(`FETCH ERROR! ${response.status}`);
       }
       const data = await response.json();
-      console.log(data,'data');
+      console.log(data, "data");
       setData(data?.data);
     } catch (error) {
       alert("Error fetching data");
